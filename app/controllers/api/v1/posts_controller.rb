@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ﻿module Api
   module V1
     class PostsController < ApplicationController
@@ -10,20 +11,24 @@
 
       def show
         render json: @post.as_json(include: {
-          user: { only: %i[id name email] },
+                                     user: { only: %i[id name email] },
           comments: { include: { user: { only: %i[id name] } } }
-        })
+                                   })
       end
 
       def create
         post = Post.new(post_params)
         if post.save then render json: post, status: :created
-        else render json: { errors: post.errors.full_messages }, status: :unprocessable_entity end
+        else
+          render json: { errors: post.errors.full_messages }, status: :unprocessable_entity 
+        end
       end
 
       def update
         if @post.update(post_params) then render json: @post
-        else render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity end
+        else
+          render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity 
+        end
       end
 
       def destroy
@@ -45,8 +50,9 @@
       end
 
       private
-      def set_post; @post = Post.find(params[:id]); end
-      def post_params; params.require(:post).permit(:title, :body, :user_id); end
+
+      def set_post() = @post = Post.find(params[:id])
+      def post_params() = params.require(:post).permit(:title, :body, :user_id)
     end
   end
 end
