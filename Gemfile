@@ -51,3 +51,8 @@ end
 gem "rack-cors", "~> 3.0"
 
 gem "pg", "~> 1.5"
+group :development, :test do
+  gem "rubocop", "~> 1.65", require: false
+  gem "rubocop-rails", require: false
+  gem "brakeman", require: false
+end

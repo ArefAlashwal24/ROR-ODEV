@@ -1,0 +1,21 @@
+﻿name: CI / scan_ruby
+on: [push, pull_request]
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+      - run: bundle config set without "production"
+      - run: bundle install --jobs 4 --retry 3
+      - name: Brakeman
+        run: bundle exec brakeman -q -w2
+        continue-on-error: true
+      - name: Bundler Audit
+        run: |
+          gem install bundler-audit
+          bundler-audit update
+          bundler-audit check || true
