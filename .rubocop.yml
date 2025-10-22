@@ -2,8 +2,4 @@
   TargetRubyVersion: 3.3
   NewCops: enable
   Exclude:
-    - "bin/**/*"
-    - "db/**/*"
-    - "config/**/*"
-    - "node_modules/**/*"
-    - "vendor/**/*"
+    - "**/*"
