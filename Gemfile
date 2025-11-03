@@ -55,6 +55,6 @@ gem 'rack-cors', '~> 3.0'
 gem 'pg', '~> 1.5'
 group :development, :test do
   gem 'brakeman', require: false
-  gem 'rubocop', '~> 1.65', require: false
+  gem 'rubocop', '~> 1.81', require: false
   gem 'rubocop-rails', require: false
 end
